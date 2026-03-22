@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5635dcaa-342e-4062-b3cd-c03e9cd1db64}</ProjectGuid>
-    <RootNamespace>LearnOpenGL</RootNamespace>
+    <ProjectGuid>{289681d3-249f-479d-beb1-4393f3a1de6d}</ProjectGuid>
+    <RootNamespace>GLFW</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -40,7 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -70,10 +70,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\glfw-3.4\include;$(SolutionDir)GLFW\include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);D:\glfw-3.4\build\src\Debug;</LibraryPath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -106,15 +102,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLFW\include;$(SolutionDir)glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,15 +127,64 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\glad\glad.vcxproj">
-      <Project>{822f9a41-0929-48ae-96c9-7a54bdfd3fb4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\GLFW\GLFW.vcxproj">
-      <Project>{289681d3-249f-479d-beb1-4393f3a1de6d}</Project>
-    </ProjectReference>
+    <ClInclude Include="include\GLFW\glfw3.h" />
+    <ClInclude Include="include\GLFW\glfw3native.h" />
+    <ClInclude Include="src\cocoa_joystick.h" />
+    <ClInclude Include="src\cocoa_platform.h" />
+    <ClInclude Include="src\cocoa_time.h" />
+    <ClInclude Include="src\internal.h" />
+    <ClInclude Include="src\linux_joystick.h" />
+    <ClInclude Include="src\mappings.h" />
+    <ClInclude Include="src\null_joystick.h" />
+    <ClInclude Include="src\null_platform.h" />
+    <ClInclude Include="src\platform.h" />
+    <ClInclude Include="src\posix_poll.h" />
+    <ClInclude Include="src\posix_thread.h" />
+    <ClInclude Include="src\posix_time.h" />
+    <ClInclude Include="src\win32_joystick.h" />
+    <ClInclude Include="src\win32_platform.h" />
+    <ClInclude Include="src\win32_thread.h" />
+    <ClInclude Include="src\win32_time.h" />
+    <ClInclude Include="src\wl_platform.h" />
+    <ClInclude Include="src\x11_platform.h" />
+    <ClInclude Include="src\xkb_unicode.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\1.cpp" />
+    <ClCompile Include="src\cocoa_time.c" />
+    <ClCompile Include="src\context.c" />
+    <ClCompile Include="src\egl_context.c" />
+    <ClCompile Include="src\glx_context.c" />
+    <ClCompile Include="src\init.c" />
+    <ClCompile Include="src\input.c" />
+    <ClCompile Include="src\linux_joystick.c" />
+    <ClCompile Include="src\monitor.c" />
+    <ClCompile Include="src\null_init.c" />
+    <ClCompile Include="src\null_joystick.c" />
+    <ClCompile Include="src\null_monitor.c" />
+    <ClCompile Include="src\null_window.c" />
+    <ClCompile Include="src\osmesa_context.c" />
+    <ClCompile Include="src\platform.c" />
+    <ClCompile Include="src\posix_module.c" />
+    <ClCompile Include="src\posix_poll.c" />
+    <ClCompile Include="src\posix_thread.c" />
+    <ClCompile Include="src\posix_time.c" />
+    <ClCompile Include="src\vulkan.c" />
+    <ClCompile Include="src\wgl_context.c" />
+    <ClCompile Include="src\win32_init.c" />
+    <ClCompile Include="src\win32_joystick.c" />
+    <ClCompile Include="src\win32_module.c" />
+    <ClCompile Include="src\win32_monitor.c" />
+    <ClCompile Include="src\win32_thread.c" />
+    <ClCompile Include="src\win32_time.c" />
+    <ClCompile Include="src\win32_window.c" />
+    <ClCompile Include="src\window.c" />
+    <ClCompile Include="src\wl_init.c" />
+    <ClCompile Include="src\wl_monitor.c" />
+    <ClCompile Include="src\wl_window.c" />
+    <ClCompile Include="src\x11_init.c" />
+    <ClCompile Include="src\x11_monitor.c" />
+    <ClCompile Include="src\x11_window.c" />
+    <ClCompile Include="src\xkb_unicode.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
