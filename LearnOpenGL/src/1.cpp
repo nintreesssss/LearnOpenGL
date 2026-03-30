@@ -20,6 +20,17 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    float vertices[] = {
+        -0.5f, -0.5f, 0.0f, // left  
+         0.5f, -0.5f, 0.0f, // right 
+         0.0f,  0.5f, 0.0f  // top   
+	};
+
+    unsigned int VBO;
+	glGenBuffers(1, &VBO); //生成一个缓冲对象，将分配的缓存区的ID存在VBO中
+	glBindBuffer(GL_ARRAY_BUFFER, VBO); //绑定缓冲对象，参数1是要绑定的缓冲对象的类型，参数2是要绑定的缓冲对象的ID
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //把用户定义的数据复制到当前绑定的缓冲对象中，参数1是要复制到的缓冲对象的类型，参数2是要复制的数据的大小，参数3是要复制的数据的指针，参数4是指定了我们希望显卡如何管理给定的数据。
+
 	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL); //创建窗口对象 前两个参数是窗口的宽和高，第三个参数是窗口标题
     if (window == NULL)
     {
