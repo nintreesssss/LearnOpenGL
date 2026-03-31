@@ -13,6 +13,13 @@ static void processInput(GLFWwindow* window)
         glfwSetWindowShouldClose(window, true);
 }
 
+const char* vertexShaderSource = "#version 330 core\n"
+"layout (location = 0) in vec3 aPos;\n"
+"void main()\n"
+"{\n"
+"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"}\0";
+
 int main(void)
 {
     glfwInit();
@@ -30,6 +37,9 @@ int main(void)
 	glGenBuffers(1, &VBO); //生成一个缓冲对象，将分配的缓存区的ID存在VBO中
 	glBindBuffer(GL_ARRAY_BUFFER, VBO); //绑定缓冲对象，参数1是要绑定的缓冲对象的类型，参数2是要绑定的缓冲对象的ID
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //把用户定义的数据复制到当前绑定的缓冲对象中，参数1是要复制到的缓冲对象的类型，参数2是要复制的数据的大小，参数3是要复制的数据的指针，参数4是指定了我们希望显卡如何管理给定的数据。
+
+	unsigned int vertexShader;
+	vertexShader = glCreateShader(GL_VERTEX_SHADER); //创建一个顶点着色器对象，参数是要创建的着色器对象的类型
 
 	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL); //创建窗口对象 前两个参数是窗口的宽和高，第三个参数是窗口标题
     if (window == NULL)
