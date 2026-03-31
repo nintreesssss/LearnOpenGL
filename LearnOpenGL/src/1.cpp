@@ -38,8 +38,21 @@ int main(void)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO); //绑定缓冲对象，参数1是要绑定的缓冲对象的类型，参数2是要绑定的缓冲对象的ID
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //把用户定义的数据复制到当前绑定的缓冲对象中，参数1是要复制到的缓冲对象的类型，参数2是要复制的数据的大小，参数3是要复制的数据的指针，参数4是指定了我们希望显卡如何管理给定的数据。
 
-	unsigned int vertexShader;
+	unsigned int vertexShader; //创建一个顶点着色器对象的ID
 	vertexShader = glCreateShader(GL_VERTEX_SHADER); //创建一个顶点着色器对象，参数是要创建的着色器对象的类型
+
+    int success;
+	char infoLog[512];
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+	glCompileShader(vertexShader); //编译着色器对象，参数是要编译的着色器对象的ID
+
+    if(!success)
+    {
+        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+	}
 
 	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL); //创建窗口对象 前两个参数是窗口的宽和高，第三个参数是窗口标题
     if (window == NULL)
